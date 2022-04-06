@@ -1,0 +1,33 @@
+#!/bin/sh
+
+function bootstrap_env() {
+  echo "Bootstrapping environment..."
+  if [ -z "${CI}" ]; then interactive; fi
+  automatic
+  echo "Bootstrap complete..."
+}
+
+function automatic() {
+  check_and_fix_ssh_agent
+}
+
+function check_and_fix_ssh_agent() {
+  install -m 0600 -d ~/.ssh
+  export SSH_ERROR="$(ssh-add -l 2> >(grep -i '^Error') | grep -i '^Error')"
+  if [ ! -z "$SSH_ERROR" ]; then 
+    eval `ssh-agent -s` && ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+  fi
+  export SSH_AGENT_CONNECT_ISSUE="$(
+      ssh-add -l 2> >(grep -i '^Could not open a connection to your authentication agent') | \
+      grep -i '^Could not open a connection to your authentication agent'
+    )"
+  if [ ! -z "$SSH_AGENT_CONNECT_ISSUE" ]; then 
+    eval `ssh-agent -s` && ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+  fi
+}
+
+function interactive() {
+  echo "Running interactive env..."
+}
+
+bootstrap_env

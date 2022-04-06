@@ -1,8 +1,6 @@
 # usage: qemu-system-aarch64 [options] [disk_image]
 #
-# 'disk_image' is a raw hard disk image for IDE hard disk 0
-#
- # -L -> set the directory for the BIOS, VGA BIOS and keymaps
+# -L -> set the directory for the BIOS, VGA BIOS and keymaps
 #
 # https://wiki.qemu.org/Documentation/QMP
 # Start QMP on a TCP socket, so that telnet can be used
