@@ -21,3 +21,10 @@ This module is an attempt to run Terraform against my workstation (stats below) 
   - get the dmg from their github releases, not the apple store
   - essentially, this uses the qemu-system command utm generates, converts it to libvirt, then translates that to terraform
 - I installed nix using the script for macos per their [website](https://nixos.org/download.html#nix-install-macos)
+- I wrote a bashrc, since the nix shell defined here uses bash and sources your users .bashrc
+
+## Updating Nix Sources
+
+- the Niv tool helps keep your sources up to date, it is installed in the environment
+- I don't know how to do this, GLHF
+

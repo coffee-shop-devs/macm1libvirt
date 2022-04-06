@@ -1,28 +1,26 @@
-
 let
   sources = import ./nix/sources.nix;
-  pkgs = import sources.stable {};
-  com = import sources.community {};
+  pkgs = import sources.nixpkgs {};
 in
 pkgs.mkShell {
-  buildInputs = [
-      com.bash
-      com.borgbackup
-      com.coreutils
-      com.curl
-      com.git
-      com.glibcLocales
-      com.gnupg
-      com.go
-      com.host
-      com.jq
-      com.nmap
-      com.openssh
-      com.ssh-agents
-      com.ssh-copy-id
-      com.terraform
-      com.tree
-      com.wget
+  buildInputs = with pkgs; [
+    bash
+    coreutils
+    findutils
+    curl
+    git
+    glibcLocales
+    gnupg
+    go
+    #host
+    jq
+    nmap
+    openssh
+    ssh-agents
+    terraform
+    tree
+    wget
+    #niv
   ];
   shellHook = ''
     source ~/.bashrc
