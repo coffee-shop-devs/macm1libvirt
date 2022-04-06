@@ -9,6 +9,7 @@ function bootstrap_env() {
 
 function automatic() {
   check_and_fix_ssh_agent
+  export LIBVIRT_DEFAULT_URI="$(virsh uri)"
 }
 
 function check_and_fix_ssh_agent() {
